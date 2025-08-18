@@ -15,7 +15,7 @@ app.use(cors({
     origin: [
         'http://localhost:3000',
         'http://localhost:5173',
-        'https://https://lilsadfoqs-weather-game.vercel.app/', // Thay bằng URL Vercel thực tế
+        'https://lilsadfoqs-weather-game.vercel.app/', // Thay bằng URL Vercel thực tế
         process.env.FRONTEND_URL
     ],
     credentials: true,
