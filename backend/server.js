@@ -5,9 +5,31 @@ const cityRoutes = require('./routes/cityRoutes');
 const cors = require('cors');
 
 const app = express();
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors());
+
+// CORS configuration - cho phép Vercel domain
+app.use(cors({
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'https://https://lilsadfoqs-weather-game.vercel.app/', // Thay bằng URL Vercel thực tế
+        process.env.FRONTEND_URL
+    ],
+    credentials: true,
+    optionsSuccessStatus: 200
+}));
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ 
+        status: 'OK', 
+        message: 'Server is running',
+        timestamp: new Date().toISOString()
+    });
+});
 
 dbConnect();
 

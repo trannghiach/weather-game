@@ -1,4 +1,4 @@
-const API_KEY = 'd2e42a11cc0abcf0ec816af429c33051';
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY || 'd2e42a11cc0abcf0ec816af429c33051';
 
 const weatherColors = {
   Clouds: "shadow-gray-500",
@@ -123,7 +123,7 @@ const weatherMainDistribution = {
   "Tornado": 0.5       // 0.5%
 };
 
-const backEndURL = 'https://weather-game-lilsadfoqs.onrender.com';
+const backEndURL = import.meta.env.VITE_API_URL || 'https://weather-game-lilsadfoqs.onrender.com';
 
 export {
     API_KEY,
