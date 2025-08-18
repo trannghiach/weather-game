@@ -27,17 +27,13 @@ export const Game = () => {
     console.log(round);
     console.log('my squad: ', mySquad);
     console.log('data: ', data);
-    console.log('array: ', Array.from({ length: 5 }, () => ({
-        main: 'Clear',
-        icon: '01d',
-        qty: 1
-    })));
     
     useEffect(() => {
         const fetch5StarterSquad = async () => {
             try {
                 const res = await axios.get(`${backEndURL}/api/cities/5`);
                 if(!res.data) return;
+                console.log("DEBUG: ", res.data);
                 starterSquadRef.current = res.data;
             } catch(err) {
                 console.error(err);
