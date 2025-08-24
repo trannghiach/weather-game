@@ -38,4 +38,19 @@ app.use('/api', cityRoutes);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    
+    // Self-ping to prevent RENDER sleep
+    if (process.env.NODE_ENV === 'production') {
+        const RENDER_URL = process.env.RENDER_EXTERNAL_URL || `https://weather-game-lilsadfoqs.onrender.com`;
+        
+        setInterval(async () => {
+            try {
+                const fetch = (await import('node-fetch')).default;
+                await fetch(`${RENDER_URL}/health`);
+                console.log('Self-ping successful');
+            } catch (error) {
+                console.log('Self-ping failed:', error.message);
+            }
+        }, 10 * 60 * 1000); // Ping mỗi 10 phút
+    }
 });
